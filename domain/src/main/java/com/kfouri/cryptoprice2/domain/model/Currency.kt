@@ -8,4 +8,5 @@ data class Currency(
     val purchasePrice: Float = 0F,
     var currentPrice: Float = 0F,
     var oldPrice: Float = 0F,
+    var icon: String
 )

@@ -14,6 +14,7 @@ data class CurrencyLocal(
     @ColumnInfo(name = "purchasePrice") val purchasePrice: Float = 0F,
     @ColumnInfo(name = "currentPrice") var currentPrice: Float = 0F,
     @ColumnInfo(name = "oldPrice") var oldPrice: Float = 0F,
+    @ColumnInfo(name = "icon") var icon: String,
 ) {
     companion object {
         const val TABLE_NAME = "Currency"

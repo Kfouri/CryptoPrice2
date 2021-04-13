@@ -17,7 +17,8 @@ constructor(): EntityMapper<Currency, CurrencyLocal> {
             amount = entity.amount,
             purchasePrice = entity.purchasePrice,
             currentPrice = entity.currentPrice,
-            oldPrice = entity.oldPrice
+            oldPrice = entity.oldPrice,
+            icon = entity.icon
         )
 
     override fun toEntity(model: Currency): CurrencyLocal =
@@ -28,6 +29,7 @@ constructor(): EntityMapper<Currency, CurrencyLocal> {
                 amount = model.amount,
                 purchasePrice = model.purchasePrice,
                 currentPrice = model.currentPrice,
-                oldPrice = model.oldPrice
+                oldPrice = model.oldPrice,
+                icon = model.icon
         )
 }

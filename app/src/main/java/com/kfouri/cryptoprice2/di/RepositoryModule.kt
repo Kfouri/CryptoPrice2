@@ -4,12 +4,14 @@ import com.kfouri.cryptoprice2.data.db.dao.CurrencyDao
 import com.kfouri.cryptoprice2.data.db.datasourceimpl.CurrencyLocalDataSource
 import com.kfouri.cryptoprice2.data.db.mapper.CurrencyLocalMapper
 import com.kfouri.cryptoprice2.data.network.datasourceimpl.CurrencyNetworkDataSource
+import com.kfouri.cryptoprice2.data.network.mapper.CurrencyAvailableNetworkMapper
 import com.kfouri.cryptoprice2.data.network.mapper.CurrencyNetworkMapper
 import com.kfouri.cryptoprice2.data.network.service.CurrencyService
 import com.kfouri.cryptoprice2.data.repository.CurrencyRepositoryImpl
 import com.kfouri.cryptoprice2.domain.datasource.DataSource
 import com.kfouri.cryptoprice2.domain.datasource.DataSourceNetwork
 import com.kfouri.cryptoprice2.domain.model.Currency
+import com.kfouri.cryptoprice2.domain.model.CurrencyAvailableNetwork
 import com.kfouri.cryptoprice2.domain.model.CurrencyNetwork
 import com.kfouri.cryptoprice2.domain.repository.CurrencyRepository
 import dagger.Module
@@ -43,8 +45,9 @@ object RepositoryModule {
     @Provides
     fun provideCurrencyNetworkDataSource(
             currencyService: CurrencyService,
-            currencyNetworkMapper: CurrencyNetworkMapper): DataSourceNetwork<CurrencyNetwork> {
-        return CurrencyNetworkDataSource(currencyService, currencyNetworkMapper)
+            currencyNetworkMapper: CurrencyNetworkMapper,
+            currencyAvailableNetworkMapper: CurrencyAvailableNetworkMapper): DataSourceNetwork<CurrencyNetwork, CurrencyAvailableNetwork> {
+        return CurrencyNetworkDataSource(currencyService, currencyNetworkMapper, currencyAvailableNetworkMapper)
     }
 
 }

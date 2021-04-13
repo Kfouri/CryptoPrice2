@@ -3,6 +3,7 @@ package com.kfouri.cryptoprice2.data.repository
 import com.kfouri.cryptoprice2.data.db.datasourceimpl.CurrencyLocalDataSource
 import com.kfouri.cryptoprice2.data.network.datasourceimpl.CurrencyNetworkDataSource
 import com.kfouri.cryptoprice2.domain.model.Currency
+import com.kfouri.cryptoprice2.domain.model.CurrencyAvailableNetwork
 import com.kfouri.cryptoprice2.domain.repository.CurrencyRepository
 import com.kfouri.cryptoprice2.domain.state.DataState
 import kotlinx.coroutines.flow.Flow
@@ -35,7 +36,8 @@ constructor(
             list.forEach {
                 it.oldPrice = it.currentPrice
                 runBlocking {
-                    it.currentPrice = currencyNetworkDataSource.getCurrency(it.name).usdt
+                    it.currentPrice = currencyNetworkDataSource.getCurrency(it.name).price
+                    it.icon = currencyNetworkDataSource.getCurrency(it.name).icon
                 }
                 currencyLocalDataSource.insertUpdateCurrency(it)
             }
@@ -54,6 +56,16 @@ constructor(
     override suspend fun removeCurrency(currency: Currency) {
         currencyLocalDataSource.removeCurrency(currency)
         currencyLocalDataSource.getAllCurrencies()
+    }
+
+    override suspend fun getCurrenciesAvailable(): Flow<DataState<List<CurrencyAvailableNetwork>>> = flow {
+        emit(DataState.InProgress())
+        try {
+            val list = currencyNetworkDataSource.getAvailableCurrencyList()
+            emit(DataState.Success(list))
+        } catch (e: Exception) {
+            emit(DataState.Failure<List<CurrencyAvailableNetwork>>(e))
+        }
     }
 
 }

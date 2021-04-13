@@ -1,10 +1,7 @@
 package com.kfouri.cryptoprice2.di
 
 import com.kfouri.cryptoprice2.domain.repository.CurrencyRepository
-import com.kfouri.cryptoprice2.domain.usecase.GetAllCurrenciesUseCase
-import com.kfouri.cryptoprice2.domain.usecase.GetCurrencyByIdUseCase
-import com.kfouri.cryptoprice2.domain.usecase.InsertUpdateCurrencyUseCase
-import com.kfouri.cryptoprice2.domain.usecase.RemoveCurrencyUseCase
+import com.kfouri.cryptoprice2.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,4 +43,13 @@ object UseCaseModule {
     ): RemoveCurrencyUseCase {
         return RemoveCurrencyUseCase(currencyRepository)
     }
+
+    @Singleton
+    @Provides
+    fun provideGetCurrenciesAvailableUseCase(
+            currencyRepository: CurrencyRepository
+    ): GetCurrenciesAvailableUseCase {
+        return GetCurrenciesAvailableUseCase(currencyRepository)
+    }
+
 }
