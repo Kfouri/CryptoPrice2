@@ -1,7 +1,9 @@
 package com.kfouri.cryptoprice2.domain.model
 
 data class Currency(
-    val id: Int,
+    val _id: Int,
+    val id: String,
+    val symbol: String,
     val name: String,
     val exchange: String = "",
     val amount: Float,

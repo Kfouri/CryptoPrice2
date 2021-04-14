@@ -1,12 +1,9 @@
 package com.kfouri.cryptoprice2.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kfouri.cryptoprice2.AvailableCurrencies
 import com.kfouri.cryptoprice2.domain.model.Currency
-import com.kfouri.cryptoprice2.domain.model.CurrencyAvailableNetwork
 import com.kfouri.cryptoprice2.domain.state.DataState
 import com.kfouri.cryptoprice2.domain.usecase.GetAllCurrenciesUseCase
 import com.kfouri.cryptoprice2.domain.usecase.GetCurrenciesAvailableUseCase
@@ -27,15 +24,10 @@ constructor(
 ): ViewModel() {
 
     private val getAllCurrenciesLiveData = MutableLiveData<DataState<List<Currency>>>()
-    private val getCurrenciesAvailableLiveData = MutableLiveData<DataState<List<CurrencyAvailableNetwork>>>()
-    private val doneLiveData = MutableLiveData<Unit>()
-
     val onGetAllCurrencies = getAllCurrenciesLiveData
-    val onCurrenciesAvailable = getCurrenciesAvailableLiveData
-    val onDone = doneLiveData
 
+    /*
     init {
-
         if (AvailableCurrencies.getSize() == 0) {
             Log.d("Kafu", "Available vacio")
             getCurrenciesAvailable()
@@ -43,6 +35,7 @@ constructor(
             Log.d("Kafu", "Available con datos: "+AvailableCurrencies.getSize())
         }
     }
+
 
     private fun getCurrenciesAvailable() {
         viewModelScope.launch {
@@ -55,6 +48,7 @@ constructor(
             }.launchIn(viewModelScope)
         }
     }
+     */
 
     fun getAllCurrencies() {
         viewModelScope.launch {
@@ -62,7 +56,9 @@ constructor(
             /*
             insertUpdateCurrencyUseCase.insertUpdateCurrency(
                     Currency(0,
-                            "flow",
+                            "",
+                            "TLM",
+                            "",
                             "Exchange",
                             1F,
                             0F,
@@ -70,9 +66,7 @@ constructor(
                             0F,
                             "")
             )
-
-             */
-
+*/
             getAllCurrenciesUseCase.getAllCurrencies().onEach {
                 val list = it.peekDataOrNull()
                 if (list != null) {
