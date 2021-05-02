@@ -5,6 +5,7 @@ import com.kfouri.cryptoprice2.data.db.datasourceimpl.CurrencyLocalDataSource
 import com.kfouri.cryptoprice2.data.network.datasourceimpl.CurrencyNetworkDataSource
 import com.kfouri.cryptoprice2.domain.model.Currency
 import com.kfouri.cryptoprice2.domain.model.CurrencyAvailableNetwork
+import com.kfouri.cryptoprice2.domain.model.CurrencyNetwork
 import com.kfouri.cryptoprice2.domain.repository.CurrencyRepository
 import com.kfouri.cryptoprice2.domain.state.DataState
 import kotlinx.coroutines.flow.Flow
@@ -35,42 +36,29 @@ constructor(
         emit(DataState.InProgress())
         try {
             val list = currencyLocalDataSource.getAllCurrencies()
-            var currencyNames = ""
 
-            list.forEach {
-                it.oldPrice = it.currentPrice
-                currencyLocalDataSource.insertUpdateCurrency(it)
-                currencyNames = currencyNames + it.symbol + ","
-            }
+            if (list.isNotEmpty()) {
+                var currencyNames = ""
 
-            currencyNames = currencyNames.substring(0, currencyNames.length - 1)
+                list.forEach {
+                    it.oldPrice = it.currentPrice
+                    currencyLocalDataSource.insertUpdateCurrency(it)
+                    currencyNames = currencyNames + it.symbol + ","
+                }
 
-            val currencyList = currencyNetworkDataSource.getCurrencies(currencyNames)
-            currencyList.forEach {
-                Log.d("Kafu", "Names: "+it.name+" Price:"+it.price+" icon: "+it.icon)
-            }
+                currencyNames = currencyNames.substring(0, currencyNames.length - 1)
 
-            list.forEach { l ->
-                val c = currencyList.find { l.symbol.compareTo(it.name,true) == 0 }
-                l.currentPrice = c?.price?:0F
-                l.icon = c?.icon?:""
+                val currencyList = currencyNetworkDataSource.getCurrencies(currencyNames)
 
-                currencyLocalDataSource.insertUpdateCurrency(l)
-            }
-            /*
-            runBlocking {
-                try {
-                    val currency = currencyNetworkDataSource.getCurrency(it.id)
-                    it.currentPrice = currency.price
-                    it.icon = currency.icon
-                    Log.d("Kafu", "$it.name")
-                } catch (e: InterruptedIOException) {
-                    it.currentPrice = 0F
-                    it.icon = ""
-                    Log.d("Kafu", "$it.name TIMEOUT!!!!!!!")
+                list.forEach { l ->
+                    val c = currencyList.find { l.symbol.compareTo(it.name,true) == 0 }
+                    l.currentPrice = c?.price?:0.0
+                    l.icon = c?.icon?:""
+
+                    currencyLocalDataSource.insertUpdateCurrency(l)
                 }
             }
-             */
+
             emit(DataState.Success(list))
         } catch (e: Exception) {
             emit(DataState.Failure<List<Currency>>(e))
@@ -97,4 +85,13 @@ constructor(
         }
     }
 
+    override suspend fun getNetworkCurrency(symbol: String): Flow<DataState<List<CurrencyNetwork>>> = flow {
+        emit(DataState.InProgress())
+        try {
+            val currencyList = currencyNetworkDataSource.getCurrencies(symbol)
+            emit(DataState.Success(currencyList))
+        } catch (e: Exception) {
+            emit(DataState.Failure<List<CurrencyNetwork>>(e))
+        }
+    }
 }

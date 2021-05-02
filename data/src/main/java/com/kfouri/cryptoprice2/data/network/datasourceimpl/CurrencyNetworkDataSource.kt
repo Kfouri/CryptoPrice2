@@ -1,6 +1,5 @@
 package com.kfouri.cryptoprice2.data.network.datasourceimpl
 
-import android.util.Log
 import com.kfouri.cryptoprice2.data.network.mapper.CurrencyAvailableNetworkMapper
 import com.kfouri.cryptoprice2.data.network.mapper.CurrencyNetworkMapper
 import com.kfouri.cryptoprice2.data.network.model.CurrencyNetworkEntity
@@ -28,17 +27,14 @@ constructor(
         symbols += ','
 
         val listPrice = symbols.split(",") as ArrayList<String>
-        Log.d("Kafu", "List size: "+listPrice.size)
         listPrice.forEach {
             val symbol = it.toUpperCase(Locale.getDefault())
             val curr = currencies.getAsJsonObject(symbol)
             if (curr != null) {
-                Log.d("Kafu", "curr: "+curr.toString())
                 val data = curr.getAsJsonObject("USDT")
                 val priceTemp = data.getAsJsonPrimitive("PRICE").toString()
                 val icon = data.getAsJsonPrimitive("IMAGEURL").toString().replace("\"","")
-                val price = priceTemp.replace("₮ ", "").replace("\"","").replace(",","").toFloat()
-                Log.d("Kafu", "Moneda: "+symbol+" Precio: "+price+" Icon: "+BASE_IMAGE + icon)
+                val price = priceTemp.replace("₮ ", "").replace("\"","").replace(",","").toDouble()
                 list.add(CurrencyNetworkEntity(symbol, price, BASE_IMAGE + icon))
             }
         }

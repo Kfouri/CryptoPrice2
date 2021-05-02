@@ -12,10 +12,10 @@ data class CurrencyLocal(
     @ColumnInfo(name = "symbol") var symbol: String,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "exchange") val exchange: String = "",
-    @ColumnInfo(name = "amount") val amount: Float,
-    @ColumnInfo(name = "purchasePrice") val purchasePrice: Float = 0F,
-    @ColumnInfo(name = "currentPrice") var currentPrice: Float = 0F,
-    @ColumnInfo(name = "oldPrice") var oldPrice: Float = 0F,
+    @ColumnInfo(name = "amount") val amount: Double,
+    @ColumnInfo(name = "purchasePrice") val purchasePrice: Double = 0.0,
+    @ColumnInfo(name = "currentPrice") var currentPrice: Double = 0.0,
+    @ColumnInfo(name = "oldPrice") var oldPrice: Double = 0.0,
     @ColumnInfo(name = "icon") var icon: String,
 ) {
     companion object {

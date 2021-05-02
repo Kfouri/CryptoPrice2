@@ -52,4 +52,11 @@ object UseCaseModule {
         return GetCurrenciesAvailableUseCase(currencyRepository)
     }
 
+    @Singleton
+    @Provides
+    fun provideGetCurrencyNetworkUseCase(
+            currencyRepository: CurrencyRepository
+    ): GetCurrencyNetworkUseCase {
+        return GetCurrencyNetworkUseCase(currencyRepository)
+    }
 }

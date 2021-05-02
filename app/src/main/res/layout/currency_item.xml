@@ -58,23 +58,85 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView_diffPrice"
+            app:layout_constraintBottom_toTopOf="@+id/textView_earn"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout_pricePercentage"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="12345678.90" />
 
-        <ImageView
-            android:id="@+id/imageView_diffPrice"
+        <LinearLayout
+            android:id="@+id/linearLayout_pricePercentage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/percentage_background_green"
             app:layout_constraintBottom_toBottomOf="@+id/textView_currencyPrice"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView_currencyPrice"
-            tools:src="@drawable/ic_arrow_up" />
+            app:layout_constraintTop_toTopOf="@+id/textView_currencyPrice">
 
+            <ImageView
+                android:id="@+id/imageView_arrowPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_arrow_up" />
+
+            <TextView
+                android:id="@+id/textView_pricePercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00%"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:layout_marginEnd="4dp"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_earn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout_earnedPercentage"
+            tools:text="12345678.90" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout_earnedPercentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/percentage_background_green"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_earn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView_earn">
+
+            <ImageView
+                android:id="@+id/imageView_arrowEarned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_arrow_up" />
+
+            <TextView
+                android:id="@+id/textView_earnedPercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00%"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:layout_marginEnd="4dp"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

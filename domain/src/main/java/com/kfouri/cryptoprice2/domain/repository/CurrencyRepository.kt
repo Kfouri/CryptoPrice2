@@ -2,6 +2,7 @@ package com.kfouri.cryptoprice2.domain.repository
 
 import com.kfouri.cryptoprice2.domain.model.Currency
 import com.kfouri.cryptoprice2.domain.model.CurrencyAvailableNetwork
+import com.kfouri.cryptoprice2.domain.model.CurrencyNetwork
 import com.kfouri.cryptoprice2.domain.state.DataState
 import kotlinx.coroutines.flow.Flow
 
@@ -11,4 +12,5 @@ interface CurrencyRepository {
     suspend fun insertUpdateCurrency(currency: Currency)
     suspend fun removeCurrency(currency: Currency)
     suspend fun getCurrenciesAvailable(): Flow<DataState<List<CurrencyAvailableNetwork>>>
+    suspend fun getNetworkCurrency(symbol: String): Flow<DataState<List<CurrencyNetwork>>>
 }

@@ -2,15 +2,16 @@ package com.kfouri.cryptoprice2.ui.view
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kfouri.cryptoprice2.R
+import com.kfouri.cryptoprice2.databinding.FragmentCurrenciesBinding
 import com.kfouri.cryptoprice2.domain.model.Currency
 import com.kfouri.cryptoprice2.domain.state.DataState
 import com.kfouri.cryptoprice2.ext.hideInProgress
@@ -28,18 +29,23 @@ class CurrenciesListFragment: Fragment() {
 
     private val viewModel: CurrenciesListViewModel by viewModels()
     private val listAdapter = ListAdapter(onClicked())
+    private lateinit var binding: FragmentCurrenciesBinding
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_currencies, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_currencies, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setLayout()
         setObserver()
+        setHasOptionsMenu(true)
         viewModel.getAllCurrencies()
     }
 
@@ -86,4 +92,38 @@ class CurrenciesListFragment: Fragment() {
         findNavController().navigate(CurrenciesListFragmentDirections.actionCurrenciesListFragmentToCreateCurrencyFragment().setCurrencyId(_id))
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.list_menu, menu)
+
+        /*
+        val searchItem = menu.findItem(R.id.action_search)
+        searchView = searchItem?.actionView as SearchView
+
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                setFilterAdapter(newText)
+                return true
+            }
+        })
+
+         */
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_add -> {
+                callNewCurrencyFragment()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun callNewCurrencyFragment() {
+        findNavController().navigate(CurrenciesListFragmentDirections.actionCurrenciesListFragmentToCreateCurrencyFragment().setCurrencyId(-1))
+    }
 }

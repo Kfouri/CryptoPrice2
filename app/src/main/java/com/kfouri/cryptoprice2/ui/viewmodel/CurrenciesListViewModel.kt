@@ -1,17 +1,17 @@
 package com.kfouri.cryptoprice2.ui.viewmodel
 
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kfouri.cryptoprice2.domain.model.Currency
 import com.kfouri.cryptoprice2.domain.state.DataState
 import com.kfouri.cryptoprice2.domain.usecase.GetAllCurrenciesUseCase
-import com.kfouri.cryptoprice2.domain.usecase.GetCurrenciesAvailableUseCase
-import com.kfouri.cryptoprice2.domain.usecase.InsertUpdateCurrencyUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,58 +19,48 @@ class CurrenciesListViewModel
 @Inject
 constructor(
     private val getAllCurrenciesUseCase: GetAllCurrenciesUseCase,
-    private val insertUpdateCurrencyUseCase: InsertUpdateCurrencyUseCase,
-    private val getCurrenciesAvailableUseCase: GetCurrenciesAvailableUseCase
 ): ViewModel() {
 
     private val getAllCurrenciesLiveData = MutableLiveData<DataState<List<Currency>>>()
     val onGetAllCurrencies = getAllCurrenciesLiveData
 
-    /*
+    val balanceObservable = ObservableField<String>()
+    val investedObservable = ObservableField<String>()
+    val earnedObservable = ObservableField<String>()
+
+
     init {
-        if (AvailableCurrencies.getSize() == 0) {
-            Log.d("Kafu", "Available vacio")
-            getCurrenciesAvailable()
-        } else {
-            Log.d("Kafu", "Available con datos: "+AvailableCurrencies.getSize())
-        }
+        balanceObservable.set("$0.00")
+        investedObservable.set("$0.00")
+        earnedObservable.set("$0.00")
     }
-
-
-    private fun getCurrenciesAvailable() {
-        viewModelScope.launch {
-            getCurrenciesAvailableUseCase.getCurrenciesAvailable().onEach {
-                val list = it.peekDataOrNull()
-                if (list != null) {
-                    AvailableCurrencies.setAvailableList(DataState.Success(list).data as ArrayList<CurrencyAvailableNetwork>)
-                    doneLiveData.value = Unit
-                }
-            }.launchIn(viewModelScope)
-        }
-    }
-     */
 
     fun getAllCurrencies() {
         viewModelScope.launch {
 
-            /*
-            insertUpdateCurrencyUseCase.insertUpdateCurrency(
-                    Currency(0,
-                            "",
-                            "TLM",
-                            "",
-                            "Exchange",
-                            1F,
-                            0F,
-                            0F,
-                            0F,
-                            "")
-            )
-*/
-            getAllCurrenciesUseCase.getAllCurrencies().onEach {
+            getAllCurrenciesUseCase.getAllCurrencies().onEach { it ->
                 val list = it.peekDataOrNull()
                 if (list != null) {
-                    getAllCurrenciesLiveData.value = DataState.Success(list)
+                    val format = NumberFormat.getCurrencyInstance()
+                    val data = DataState.Success(list)
+                    val currencyList = data.data
+
+                    var balance = 0.0
+                    var totalInvested = 0.0
+                    var totalEarned = 0.0
+
+                    currencyList?.forEach { item ->
+                        balance += item.currentPrice * item.amount
+                        totalInvested += item.purchasePrice * item.amount
+                    }
+
+                    totalEarned = balance - totalInvested
+
+                    balanceObservable.set(format.format(balance).toString())
+                    investedObservable.set(format.format(totalInvested).toString())
+                    earnedObservable.set(format.format(totalEarned).toString())
+
+                    getAllCurrenciesLiveData.value = data
                 } else {
                     getAllCurrenciesLiveData.value = it
                 }
