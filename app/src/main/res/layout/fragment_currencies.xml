@@ -2,6 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -103,20 +104,39 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:name="com.kfouri.cryptoprice2.ui.view.CurrenciesListFragment"
-            android:layout_width="match_parent"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
-            android:clipToPadding="false"
-            app:layoutManager="LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/adView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout_header"
-            tools:context="com.kfouri.cryptoprice2.ui.view.CurrenciesListFragment"
-            tools:listitem="@layout/currency_item" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_header">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:name="com.kfouri.cryptoprice2.ui.view.CurrenciesListFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="30dp"
+                android:clipToPadding="false"
+                app:layoutManager="LinearLayoutManager"
+                tools:context="com.kfouri.cryptoprice2.ui.view.CurrenciesListFragment"
+                tools:listitem="@layout/currency_item" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-8178489486911148/7540407420"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

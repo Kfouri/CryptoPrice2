@@ -10,5 +10,6 @@ data class Currency(
         var purchasePrice: Double = 0.0,
         var currentPrice: Double = 0.0,
         var oldPrice: Double = 0.0,
-        var icon: String
+        var icon: String,
+        var open24: Double = 0.0
 )

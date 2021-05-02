@@ -1,10 +1,8 @@
 package com.kfouri.cryptoprice2.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.kfouri.cryptoprice2.R
@@ -14,7 +12,6 @@ import kotlinx.android.synthetic.main.currency_item.view.*
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.NumberFormat
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.abs
 
@@ -64,9 +61,9 @@ class ListAdapter(private val clickListener: (Int) -> Unit) : RecyclerView.Adapt
 
             } else {
 
-                val res = abs((item.currentPrice - item.oldPrice) * 100 / item.oldPrice)
-                itemView.textView_pricePercentage.text = "${res.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()}%"
-                if (item.oldPrice > item.currentPrice) {
+                val res = item.currentPrice * 100 / item.open24 - 100
+                itemView.textView_pricePercentage.text = "${res.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()}% 1D"
+                if (res < 0.0) {
                     itemView.linearLayout_pricePercentage.setBackgroundResource(R.drawable.percentage_background_red)
                     itemView.imageView_arrowPrice.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_arrow_down))
                 } else {
@@ -75,18 +72,22 @@ class ListAdapter(private val clickListener: (Int) -> Unit) : RecyclerView.Adapt
                 }
 
                 var earned = item.amount * item.currentPrice - item.amount * item.purchasePrice
-                var earnedPercentage = abs(earned * 100 / item.purchasePrice)
+                var earnedPercentage = abs((item.amount * item.currentPrice) * 100 / (item.amount * item.purchasePrice))
 
-                earned = if (earned >= 1) {
+                earned = if (earned >= 1 || earned <= -1) {
                     earned.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
                 } else {
                     earned.toBigDecimal().setScale(8, RoundingMode.UP).toDouble()
                 }
 
-                earnedPercentage = earnedPercentage.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
-                itemView.textView_earnedPercentage.text = "${earnedPercentage}%"
+                earnedPercentage = if (earnedPercentage.toString() == "NaN") {
+                    0.0
+                } else {
+                    earnedPercentage.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
+                }
+                itemView.textView_earnedPercentage.text = "${earnedPercentage}% ALL"
 
-                itemView.textView_earn.text = "${earned}"
+                itemView.textView_earn.text = "$" + earned
                 if (item.purchasePrice > item.currentPrice) {
                     itemView.linearLayout_earnedPercentage.setBackgroundResource(R.drawable.percentage_background_red)
                     itemView.imageView_arrowEarned.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_arrow_down))

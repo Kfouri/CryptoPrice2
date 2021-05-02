@@ -33,9 +33,11 @@ constructor(
             if (curr != null) {
                 val data = curr.getAsJsonObject("USDT")
                 val priceTemp = data.getAsJsonPrimitive("PRICE").toString()
+                val open24hrTemp = data.getAsJsonPrimitive("OPEN24HOUR").toString()
                 val icon = data.getAsJsonPrimitive("IMAGEURL").toString().replace("\"","")
                 val price = priceTemp.replace("₮ ", "").replace("\"","").replace(",","").toDouble()
-                list.add(CurrencyNetworkEntity(symbol, price, BASE_IMAGE + icon))
+                val open24hr = open24hrTemp.replace("₮ ", "").replace("\"","").replace(",","").toDouble()
+                list.add(CurrencyNetworkEntity(symbol, price, BASE_IMAGE + icon, open24hr))
             }
         }
 

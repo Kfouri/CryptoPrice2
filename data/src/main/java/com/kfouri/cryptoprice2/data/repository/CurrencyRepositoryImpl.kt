@@ -54,6 +54,7 @@ constructor(
                     val c = currencyList.find { l.symbol.compareTo(it.name,true) == 0 }
                     l.currentPrice = c?.price?:0.0
                     l.icon = c?.icon?:""
+                    l.open24 = c?.open24?:0.0
 
                     currencyLocalDataSource.insertUpdateCurrency(l)
                 }

@@ -9,9 +9,9 @@ class CurrencyNetworkMapper
 constructor(): EntityMapper<CurrencyNetwork, CurrencyNetworkEntity> {
 
     override fun toModel(entity: CurrencyNetworkEntity): CurrencyNetwork =
-        CurrencyNetwork(entity.name, entity.price, entity.icon)
+        CurrencyNetwork(entity.name, entity.price, entity.icon, entity.open24)
 
     override fun toEntity(model: CurrencyNetwork): CurrencyNetworkEntity =
-            CurrencyNetworkEntity(model.name, model.price, model.icon)
+            CurrencyNetworkEntity(model.name, model.price, model.icon, model.open24)
 }
 

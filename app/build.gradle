@@ -96,4 +96,6 @@ dependencies {
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
 
     androidTestImplementation "androidx.test:core-ktx:$test_version"
+
+    implementation 'com.google.android.gms:play-services-ads:20.1.0'
 }

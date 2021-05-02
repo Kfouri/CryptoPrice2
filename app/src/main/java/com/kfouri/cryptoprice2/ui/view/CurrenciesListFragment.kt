@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
 import com.kfouri.cryptoprice2.R
 import com.kfouri.cryptoprice2.databinding.FragmentCurrenciesBinding
 import com.kfouri.cryptoprice2.domain.model.Currency
@@ -47,6 +48,15 @@ class CurrenciesListFragment: Fragment() {
         setObserver()
         setHasOptionsMenu(true)
         viewModel.getAllCurrencies()
+
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+
+        swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing = false
+            Log.d("Kafu", "Refresh viewModel.getAllCurrencies()")
+            viewModel.getAllCurrencies()
+        }
     }
 
     private fun setLayout() {
