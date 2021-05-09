@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
+import java.math.RoundingMode
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,6 +37,7 @@ constructor(
     val amountObservable = ObservableField<String>()
     val purchasePriceObservable = ObservableField<String>()
     val totalInvestedObservable = ObservableField<String>()
+    val totalCurrentObservable = ObservableField<String>()
     val iconObservable = ObservableField<String>()
     val progressBarVisibilityObservable = ObservableField<Boolean>()
     val buttonSaveObservable = ObservableField<Boolean>()
@@ -52,6 +54,7 @@ constructor(
         amountObservable.set("")
         purchasePriceObservable.set("")
         totalInvestedObservable.set("$0.00")
+        totalCurrentObservable.set("$0.00")
 
         mCurrentCurrency = Currency(
                 0,
@@ -141,7 +144,8 @@ constructor(
                     exchangeObservable.set(mCurrentCurrency.exchange)
                     amountObservable.set(BigDecimal.valueOf(mCurrentCurrency.amount).toPlainString())
                     purchasePriceObservable.set(BigDecimal.valueOf(mCurrentCurrency.purchasePrice).toPlainString())
-                    totalInvestedObservable.set(BigDecimal.valueOf((mCurrentCurrency.purchasePrice * mCurrentCurrency.amount)).toPlainString())
+                    totalInvestedObservable.set("$"+(mCurrentCurrency.purchasePrice * mCurrentCurrency.amount).toBigDecimal().setScale(2, RoundingMode.UP).toDouble().toString())
+                    totalCurrentObservable.set("$"+(mCurrentCurrency.currentPrice * mCurrentCurrency.amount).toBigDecimal().setScale(2, RoundingMode.UP).toDouble().toString())
                     getNetworkCurrency(mCurrentCurrency.symbol)
                 }
                 progressBarVisibilityObservable.set(false)

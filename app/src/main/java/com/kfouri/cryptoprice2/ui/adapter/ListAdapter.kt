@@ -1,5 +1,6 @@
 package com.kfouri.cryptoprice2.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,8 +73,14 @@ class ListAdapter(private val clickListener: (Int) -> Unit) : RecyclerView.Adapt
                 }
 
                 var earned = item.amount * item.currentPrice - item.amount * item.purchasePrice
-                var earnedPercentage = abs((item.amount * item.currentPrice) * 100 / (item.amount * item.purchasePrice))
+                var have = item.amount * item.currentPrice
+                itemView.textView_have.text = "$" + have.toBigDecimal().setScale(2, RoundingMode.UP).toDouble().toString()
 
+                var earnedPercentage = 0.0
+
+                if (item.purchasePrice != 0.0 && item.amount != 0.0) {
+                    earnedPercentage = ((item.amount * item.currentPrice) * 100 / (item.amount * item.purchasePrice)) - 100
+                }
                 earned = if (earned >= 1 || earned <= -1) {
                     earned.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
                 } else {
