@@ -41,24 +41,18 @@ constructor(
             getAllCurrenciesUseCase.getAllCurrencies().onEach { it ->
                 val list = it.peekDataOrNull()
                 if (list != null) {
-                    val format = NumberFormat.getCurrencyInstance()
                     val data = DataState.Success(list)
                     val currencyList = data.data
 
                     var balance = 0.0
                     var totalInvested = 0.0
-                    var totalEarned = 0.0
 
                     currencyList?.forEach { item ->
                         balance += item.currentPrice * item.amount
                         totalInvested += item.purchasePrice * item.amount
                     }
 
-                    totalEarned = balance - totalInvested
-
-                    balanceObservable.set(format.format(balance).toString())
-                    investedObservable.set(format.format(totalInvested).toString())
-                    earnedObservable.set(format.format(totalEarned).toString())
+                    refreshHeader(totalInvested, balance)
 
                     getAllCurrenciesLiveData.value = data
                 } else {
@@ -67,5 +61,14 @@ constructor(
             }.launchIn(viewModelScope)
 
         }
+    }
+
+    fun refreshHeader(totalInvested: Double, balance: Double) {
+        val totalEarned = balance - totalInvested
+        val format = NumberFormat.getCurrencyInstance()
+
+        balanceObservable.set(format.format(balance).toString())
+        investedObservable.set(format.format(totalInvested).toString())
+        earnedObservable.set(format.format(totalEarned).toString())
     }
 }

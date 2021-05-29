@@ -29,8 +29,9 @@ private val TAG = CurrenciesListFragment::class.java.simpleName
 class CurrenciesListFragment: Fragment() {
 
     private val viewModel: CurrenciesListViewModel by viewModels()
-    private val listAdapter = ListAdapter(onClicked())
+    private val listAdapter = ListAdapter(onClicked(), onRefreshList())
     private lateinit var binding: FragmentCurrenciesBinding
+    private var searchView : SearchView? = null
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -105,7 +106,6 @@ class CurrenciesListFragment: Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.list_menu, menu)
 
-        /*
         val searchItem = menu.findItem(R.id.action_search)
         searchView = searchItem?.actionView as SearchView
 
@@ -119,8 +119,6 @@ class CurrenciesListFragment: Fragment() {
                 return true
             }
         })
-
-         */
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -135,5 +133,13 @@ class CurrenciesListFragment: Fragment() {
 
     private fun callNewCurrencyFragment() {
         findNavController().navigate(CurrenciesListFragmentDirections.actionCurrenciesListFragmentToCreateCurrencyFragment().setCurrencyId(-1))
+    }
+
+    private fun setFilterAdapter(newText: String?) {
+        listAdapter.filter.filter(newText)
+    }
+
+    private fun onRefreshList() : (Double, Double) -> Unit = { totalInvested, balance ->
+        viewModel.refreshHeader(totalInvested, balance)
     }
 }

@@ -1,9 +1,10 @@
 package com.kfouri.cryptoprice2.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.kfouri.cryptoprice2.R
@@ -14,11 +15,13 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.NumberFormat
 import kotlin.collections.ArrayList
-import kotlin.math.abs
 
-class ListAdapter(private val clickListener: (Int) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ListAdapter(private val clickListener: (Int) -> Unit,
+                  private val refreshList: (Double, Double) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+    Filterable {
 
     private var list = ArrayList<Currency>()
+    private var fullList = ArrayList<Currency>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.currency_item, parent, false))
@@ -37,6 +40,7 @@ class ListAdapter(private val clickListener: (Int) -> Unit) : RecyclerView.Adapt
     fun setData(newList: ArrayList<Currency>) {
         list.clear()
         list.addAll(newList)
+        fullList = ArrayList(list)
         notifyDataSetChanged()
     }
 
@@ -106,4 +110,45 @@ class ListAdapter(private val clickListener: (Int) -> Unit) : RecyclerView.Adapt
             itemView.setOnClickListener { clickListener(item._id) }
         }
     }
+
+    override fun getFilter(): Filter {
+        return itemFilter
+    }
+
+    private val itemFilter = object: Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filterList = ArrayList<Any>()
+            if (!constraint.isNullOrEmpty()) {
+                fullList.forEach {
+                    if (it.symbol.toLowerCase().contains(constraint.toString().toLowerCase().trim())) {
+                        filterList.add(it)
+                    }
+                }
+            } else {
+                filterList.addAll(fullList)
+            }
+
+            val result = FilterResults()
+            result.values = filterList
+
+            return result
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            list.clear()
+            list.addAll(results?.values as ArrayList<Currency>)
+
+            var balance = 0.0
+            var totalInvested = 0.0
+
+            list.forEach { item ->
+                balance += item.currentPrice * item.amount
+                totalInvested += item.purchasePrice * item.amount
+            }
+            
+            refreshList(totalInvested, balance)
+            notifyDataSetChanged()
+        }
+    }
+
 }
