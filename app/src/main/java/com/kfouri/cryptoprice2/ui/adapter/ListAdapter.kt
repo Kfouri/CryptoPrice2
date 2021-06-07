@@ -52,6 +52,7 @@ class ListAdapter(private val clickListener: (Int) -> Unit,
             itemView.textView_currencySymbol.text = item.symbol
             itemView.textView_currencyExchange.text = item.exchange
             itemView.textView_currencyPrice.text = "$"+BigDecimal.valueOf(item.currentPrice).toPlainString()
+            itemView.textView_currencyAmount.text = BigDecimal.valueOf(item.amount).toPlainString()
 
             if (item.currentPrice == 0.0) {
                 itemView.textView_currencyPrice.text = "$0.00"
