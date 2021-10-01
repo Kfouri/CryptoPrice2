@@ -3,7 +3,7 @@ package com.kfouri.cryptoprice2.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.kfouri.cryptoprice2.data.network.service.CurrencyService
-import com.kfouri.cryptoprice2.data.network.utils.NetworkConstants.BASE_URL
+import com.kfouri.cryptoprice2.data.network.utils.NetworkConstants.BASE_URL_COINGECKO
 import com.kfouri.cryptoprice2.data.network.utils.NetworkConstants.TIMEOUT_IN_SECONDS
 import dagger.Module
 import dagger.Provides
@@ -72,7 +72,7 @@ object RetrofitModule {
             okHttpClient: OkHttpClient
     ): Retrofit.Builder{
         return Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(BASE_URL_COINGECKO)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
     }

@@ -20,6 +20,22 @@ constructor(
         private val currencyAvailableNetworkMapper: CurrencyAvailableNetworkMapper
 ) : DataSourceNetwork<CurrencyNetwork, CurrencyAvailableNetwork> {
 
+    override suspend fun getCurrencyCoinGecko(symbols: String): List<CurrencyNetwork> {
+
+        val currencies = currencyService.getCurrenciesCoinGecko(symbols)
+        val list = ArrayList<CurrencyNetworkEntity>()
+
+        currencies.forEach {
+            val symbol = it.symbol.toUpperCase(Locale.getDefault())
+            val price = it.currentPrice
+            val image = it.image
+            val open24hr = it.priceChangePercentage24h
+            list.add(CurrencyNetworkEntity(symbol, price, image, open24hr))
+        }
+
+        return currencyNetworkMapper.toModelList(list)
+    }
+
     override suspend fun getCurrencies(symbols: String): List<CurrencyNetwork> {
         var symbols = symbols
         val currencies = currencyService.getPrice(symbols).display

@@ -29,5 +29,12 @@
             android:name="currencyId"
             android:defaultValue="-1"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_createCurrencyFragment_to_findCurrencyFragment"
+            app:destination="@id/findCurrencyFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/findCurrencyFragment"
+        android:name="com.kfouri.cryptoprice2.ui.view.FindCurrencyFragment"
+        android:label="FindCurrencyFragment" />
 </navigation>

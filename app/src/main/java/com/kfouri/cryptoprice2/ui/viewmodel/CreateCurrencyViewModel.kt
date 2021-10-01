@@ -1,6 +1,5 @@
 package com.kfouri.cryptoprice2.ui.viewmodel
 
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,11 +24,14 @@ constructor(
     private val getCurrencyNetworkUseCase: GetCurrencyNetworkUseCase,
     private val insertUpdateCurrencyUseCase: InsertUpdateCurrencyUseCase,
     private val removeCurrencyUseCase: RemoveCurrencyUseCase,
-    private val getCurrencyByIdUseCase: GetCurrencyByIdUseCase,
+    private val getCurrencyByIdUseCase: GetCurrencyByIdUseCase
 ): ViewModel() {
 
     private val finishLiveData = MutableLiveData<Unit>()
     val onFinish = finishLiveData
+    lateinit var currencyId: String
+    lateinit var currencySymbol: String
+    lateinit var currencyName: String
 
     val symbolObservable = ObservableField<String>()
     val currentPriceObservable = ObservableField<String>()
@@ -69,10 +71,10 @@ constructor(
                 "")
     }
 
-    fun getNetworkCurrency(symbol: String) {
+    fun getNetworkCurrency() {
         progressBarVisibilityObservable.set(true)
         viewModelScope.launch {
-            getCurrencyNetworkUseCase.getCurrencyNetwork(symbol).onEach { data ->
+            getCurrencyNetworkUseCase.getCurrencyNetwork(currencyId).onEach { data ->
                 val list = data.peekDataOrNull()
                 list?.let {
                     currentPriceObservable.set(BigDecimal.valueOf(it[0].price).toPlainString())
@@ -111,6 +113,7 @@ constructor(
             }
 
             mCurrentCurrency.apply {
+                id = currencyId
                 symbol = symbolObservable.get().toString()
                 exchange = exchangeObservable.get().toString()
                 amount = am
@@ -146,7 +149,8 @@ constructor(
                     purchasePriceObservable.set(BigDecimal.valueOf(mCurrentCurrency.purchasePrice).toPlainString())
                     totalInvestedObservable.set("$"+(mCurrentCurrency.purchasePrice * mCurrentCurrency.amount).toBigDecimal().setScale(2, RoundingMode.UP).toDouble().toString())
                     totalCurrentObservable.set("$"+(mCurrentCurrency.currentPrice * mCurrentCurrency.amount).toBigDecimal().setScale(2, RoundingMode.UP).toDouble().toString())
-                    getNetworkCurrency(mCurrentCurrency.symbol)
+                    currencyId = mCurrentCurrency.id
+                    getNetworkCurrency()
                 }
                 progressBarVisibilityObservable.set(false)
             }.launchIn(viewModelScope)

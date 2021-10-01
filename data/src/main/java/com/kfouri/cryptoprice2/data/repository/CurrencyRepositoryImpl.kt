@@ -1,6 +1,5 @@
 package com.kfouri.cryptoprice2.data.repository
 
-import android.util.Log
 import com.kfouri.cryptoprice2.data.db.datasourceimpl.CurrencyLocalDataSource
 import com.kfouri.cryptoprice2.data.network.datasourceimpl.CurrencyNetworkDataSource
 import com.kfouri.cryptoprice2.domain.model.Currency
@@ -10,9 +9,6 @@ import com.kfouri.cryptoprice2.domain.repository.CurrencyRepository
 import com.kfouri.cryptoprice2.domain.state.DataState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.runBlocking
-import java.io.InterruptedIOException
-import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class CurrencyRepositoryImpl
@@ -38,17 +34,17 @@ constructor(
             val list = currencyLocalDataSource.getAllCurrencies()
 
             if (list.isNotEmpty()) {
-                var currencyNames = ""
+                var currenciesId = ""
 
                 list.forEach {
                     it.oldPrice = it.currentPrice
                     currencyLocalDataSource.insertUpdateCurrency(it)
-                    currencyNames = currencyNames + it.symbol + ","
+                    currenciesId = currenciesId + it.id + ","
                 }
 
-                currencyNames = currencyNames.substring(0, currencyNames.length - 1)
+                currenciesId = currenciesId.substring(0, currenciesId.length - 1)
 
-                val currencyList = currencyNetworkDataSource.getCurrencies(currencyNames)
+                val currencyList = currencyNetworkDataSource.getCurrencyCoinGecko(currenciesId)
 
                 list.forEach { l ->
                     val c = currencyList.find { l.symbol.compareTo(it.name,true) == 0 }
@@ -89,7 +85,7 @@ constructor(
     override suspend fun getNetworkCurrency(symbol: String): Flow<DataState<List<CurrencyNetwork>>> = flow {
         emit(DataState.InProgress())
         try {
-            val currencyList = currencyNetworkDataSource.getCurrencies(symbol)
+            val currencyList = currencyNetworkDataSource.getCurrencyCoinGecko(symbol)
             emit(DataState.Success(currencyList))
         } catch (e: Exception) {
             emit(DataState.Failure<List<CurrencyNetwork>>(e))

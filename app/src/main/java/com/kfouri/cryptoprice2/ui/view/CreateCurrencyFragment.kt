@@ -2,29 +2,28 @@ package com.kfouri.cryptoprice2.ui.view
 
 import android.os.Bundle
 import android.view.*
-import android.view.View.OnFocusChangeListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.kfouri.cryptoprice2.R
 import com.kfouri.cryptoprice2.databinding.FragmentCreateCurrencyBinding
-import com.kfouri.cryptoprice2.ext.showError
-import com.kfouri.cryptoprice2.ext.showSnackbar
+import com.kfouri.cryptoprice2.ext.getNavigationResultLiveData
+import com.kfouri.cryptoprice2.ext.toEditable
 import com.kfouri.cryptoprice2.ui.viewmodel.CreateCurrencyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_create_currency.*
 
 @AndroidEntryPoint
 class CreateCurrencyFragment: Fragment() {
 
     private val viewModel: CreateCurrencyViewModel by viewModels()
-    private var currencyId = -1
+    private var localCurrencyId = -1
     private lateinit var binding: FragmentCreateCurrencyBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_create_currency,
@@ -38,26 +37,38 @@ class CreateCurrencyFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        currencyId = arguments?.getInt("currencyId")?: -1
+        localCurrencyId = arguments?.getInt("currencyId") ?: -1
 
         setObserver()
 
-        if (currencyId == -1) {
+        if (localCurrencyId == -1) {
             (activity as MainActivity).supportActionBar?.title = "New Currency"
             setHasOptionsMenu(false)
         } else {
             (activity as MainActivity).supportActionBar?.title = "Edit Currency"
             setHasOptionsMenu(true)
-            viewModel.getCurrencyById(currencyId)
+            viewModel.getCurrencyById(localCurrencyId)
         }
 
-        buttonCancel.setOnClickListener {
+        binding.buttonCancel.setOnClickListener {
             activity?.onBackPressed()
         }
 
-        editText_symbol.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus && !editText_symbol.text.isNullOrBlank()) {
-                viewModel.getNetworkCurrency(editText_symbol.text.toString())
+        binding.searchButton.setOnClickListener {
+            findNavController().navigate(CreateCurrencyFragmentDirections.actionCreateCurrencyFragmentToFindCurrencyFragment())
+        }
+
+        val result = getNavigationResultLiveData<String>("currency_id")
+        result?.observe(viewLifecycleOwner) { result ->
+            result?.let {
+                val listResult = result.toString().split("#|#")
+
+                viewModel.currencyId = listResult[0]
+                viewModel.currencyName = listResult[1]
+                viewModel.currencySymbol = listResult[2]
+
+                binding.editTextSymbol.text = viewModel.currencySymbol.toEditable()
+                viewModel.getNetworkCurrency()
             }
         }
     }

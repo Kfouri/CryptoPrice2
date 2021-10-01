@@ -67,9 +67,9 @@ class ListAdapter(private val clickListener: (Int) -> Unit,
 
             } else {
 
-                val res = item.currentPrice * 100 / item.open24 - 100
-                itemView.textView_pricePercentage.text = "${res.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()}% 1D"
-                if (res < 0.0) {
+                //val res = item.currentPrice * 100 / item.open24 - 100
+                itemView.textView_pricePercentage.text = "${item.open24.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()}% 1D"
+                if (item.open24 < 0.0) {
                     itemView.linearLayout_pricePercentage.setBackgroundResource(R.drawable.percentage_background_red)
                     itemView.imageView_arrowPrice.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_arrow_down))
                 } else {
