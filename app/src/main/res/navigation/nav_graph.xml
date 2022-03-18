@@ -4,7 +4,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/currenciesListFragment">
+    app:startDestination="@id/authenticationFragment">
+
+    <fragment
+        android:id="@+id/authenticationFragment"
+        android:name="com.kfouri.cryptoprice2.ui.view.AuthenticationFragment"
+        android:label="Authentication"
+        tools:layout="@layout/fragment_authentication" >
+
+        <action
+            android:id="@+id/action_create_password"
+            app:destination="@id/createPasswordFragment"
+            app:popUpTo="@+id/authenticationFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_password_successful"
+            app:destination="@id/currenciesListFragment"
+            app:popUpTo="@+id/authenticationFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/createPasswordFragment"
+        android:name="com.kfouri.cryptoprice2.ui.view.CreatePasswordFragment"
+        android:label="Create Password"
+        tools:layout="@layout/fragment_create_password" >
+
+        <action
+            android:id="@+id/action_confirm_password"
+            app:destination="@id/confirmPasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/confirmPasswordFragment"
+        android:name="com.kfouri.cryptoprice2.ui.view.ConfirmPasswordFragment"
+        android:label="Confirmar Password"
+        tools:layout="@layout/fragment_confirm_password" >
+
+        <action
+            android:id="@+id/action_password_created"
+            app:destination="@id/currenciesListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/currenciesListFragment"

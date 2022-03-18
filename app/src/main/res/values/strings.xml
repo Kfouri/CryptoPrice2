@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">CryptoPrice</string>
+    <string name="enter_your_password">Ingresá tu clave</string>
+    <string name="create_your_password">Creá tu clave</string>
+    <string name="do_not_remember_password">No recuerdo mi clave</string>
+    <string name="repeat_password">Repetir clave</string>
+    <string name="button_create_password">Crear Clave</string>
+    <string name="button_back">Atrás</string>
+    <string name="button_continue">Continuar</string>
+    <string name="password_not_match_error">Ambas claves no son iguales</string>
+    <string name="create_your_password_subtilte">Esta clave de seis dígitos la vas a usar para ingresar en la app de ahora en más.</string>
 </resources>

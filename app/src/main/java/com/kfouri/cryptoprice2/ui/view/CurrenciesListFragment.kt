@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdRequest
 import com.kfouri.cryptoprice2.R
@@ -65,6 +66,7 @@ class CurrenciesListFragment: Fragment() {
 
         recycler_view.apply {
             layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL))
             adapter = listAdapter
         }
     }
@@ -123,6 +125,10 @@ class CurrenciesListFragment: Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            android.R.id.home -> {
+                activity?.finish()
+                return true
+            }
             R.id.action_add -> {
                 callNewCurrencyFragment()
                 true

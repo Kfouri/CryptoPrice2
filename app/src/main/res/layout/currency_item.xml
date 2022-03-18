@@ -1,168 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:cardCornerRadius="10dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:id="@+id/item_parent"
-    android:backgroundTint="@color/dark"
+    android:orientation="horizontal"
+    android:background="@color/background_list"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imageView_logo"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textView_currencySymbol"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".20"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        tools:text="OMI" />
+
+    <TextView
+        android:id="@+id/textView_currencyPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".25"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        tools:text="12345678.90" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout_pricePercentage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".20"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/percentage_background_green">
 
         <ImageView
-            android:id="@+id/imageView_logo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/imageView_arrowPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_arrow_up" />
 
         <TextView
-            android:id="@+id/textView_currencySymbol"
+            android:id="@+id/textView_pricePercentage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="4dp"
+            android:text="0.00%"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView_logo"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="OMI" />
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView_currencyExchange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView_logo"
-            app:layout_constraintTop_toBottomOf="@+id/textView_currencySymbol"
-            tools:text="Huobi" />
-
-        <TextView
-            android:id="@+id/textView_currencyAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/textView_currencyExchange"
-            app:layout_constraintTop_toBottomOf="@+id/textView_currencyExchange"
-            tools:text="0" />
-
-        <TextView
-            android:id="@+id/textView_currencyPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView_have"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout_pricePercentage"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="12345678.90" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout_pricePercentage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/percentage_background_green"
-            app:layout_constraintBottom_toBottomOf="@+id/textView_currencyPrice"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView_currencyPrice">
-
-            <ImageView
-                android:id="@+id/imageView_arrowPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_arrow_up" />
-
-            <TextView
-                android:id="@+id/textView_pricePercentage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.00%"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/white"
-                android:layout_marginEnd="4dp"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".25"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView_have"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView_earn"
-            app:layout_constraintEnd_toEndOf="@+id/textView_earn"
             tools:text="12345678.90" />
 
         <TextView
-            android:id="@+id/textView_earn"
+            android:id="@+id/textView_currencyAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout_earnedPercentage"
-            tools:text="12345678.90" />
+            tools:text="0" />
+    </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout_earnedPercentage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/percentage_background_green"
-            app:layout_constraintBottom_toBottomOf="@+id/textView_earn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView_earn">
-
-            <ImageView
-                android:id="@+id/imageView_arrowEarned"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_arrow_up" />
-
-            <TextView
-                android:id="@+id/textView_earnedPercentage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.00%"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/white"
-                android:layout_marginEnd="4dp"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</LinearLayout>

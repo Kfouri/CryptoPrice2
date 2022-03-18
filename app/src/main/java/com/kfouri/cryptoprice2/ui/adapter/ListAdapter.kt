@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.currency_item.view.*
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.NumberFormat
+import java.util.Locale
 import kotlin.collections.ArrayList
 
 class ListAdapter(private val clickListener: (Int) -> Unit,
@@ -49,8 +50,7 @@ class ListAdapter(private val clickListener: (Int) -> Unit,
             val format: NumberFormat = NumberFormat.getCurrencyInstance()
 
             itemView.imageView_logo.loadFromUrl(item.icon)
-            itemView.textView_currencySymbol.text = item.symbol
-            itemView.textView_currencyExchange.text = item.exchange
+            itemView.textView_currencySymbol.text = item.symbol.toUpperCase(Locale.ROOT)
             itemView.textView_currencyPrice.text = "$"+BigDecimal.valueOf(item.currentPrice).toPlainString()
             itemView.textView_currencyAmount.text = BigDecimal.valueOf(item.amount).toPlainString()
 
@@ -60,15 +60,9 @@ class ListAdapter(private val clickListener: (Int) -> Unit,
                 itemView.linearLayout_pricePercentage.setBackgroundResource(R.drawable.percentage_background_green)
                 itemView.imageView_arrowPrice.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_arrow_up))
 
-                itemView.textView_earn.text = "$0.00"
-                itemView.textView_earnedPercentage.text = "$0.00"
-                itemView.linearLayout_earnedPercentage.setBackgroundResource(R.drawable.percentage_background_green)
-                itemView.imageView_arrowEarned.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_arrow_up))
-
             } else {
 
-                //val res = item.currentPrice * 100 / item.open24 - 100
-                itemView.textView_pricePercentage.text = "${item.open24.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()}% 1D"
+                itemView.textView_pricePercentage.text = "${item.open24.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()}%"
                 if (item.open24 < 0.0) {
                     itemView.linearLayout_pricePercentage.setBackgroundResource(R.drawable.percentage_background_red)
                     itemView.imageView_arrowPrice.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_arrow_down))
@@ -77,36 +71,9 @@ class ListAdapter(private val clickListener: (Int) -> Unit,
                     itemView.imageView_arrowPrice.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_arrow_up))
                 }
 
-                var earned = item.amount * item.currentPrice - item.amount * item.purchasePrice
-                var have = item.amount * item.currentPrice
+                val have = item.amount * item.currentPrice
                 itemView.textView_have.text = "$" + have.toBigDecimal().setScale(2, RoundingMode.UP).toDouble().toString()
 
-                var earnedPercentage = 0.0
-
-                if (item.purchasePrice != 0.0 && item.amount != 0.0) {
-                    earnedPercentage = ((item.amount * item.currentPrice) * 100 / (item.amount * item.purchasePrice)) - 100
-                }
-                earned = if (earned >= 1 || earned <= -1) {
-                    earned.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
-                } else {
-                    earned.toBigDecimal().setScale(8, RoundingMode.UP).toDouble()
-                }
-
-                earnedPercentage = if (earnedPercentage.toString() == "NaN") {
-                    0.0
-                } else {
-                    earnedPercentage.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
-                }
-                itemView.textView_earnedPercentage.text = "${earnedPercentage}% ALL"
-
-                itemView.textView_earn.text = "$" + earned
-                if (item.purchasePrice > item.currentPrice) {
-                    itemView.linearLayout_earnedPercentage.setBackgroundResource(R.drawable.percentage_background_red)
-                    itemView.imageView_arrowEarned.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_arrow_down))
-                } else {
-                    itemView.linearLayout_earnedPercentage.setBackgroundResource(R.drawable.percentage_background_green)
-                    itemView.imageView_arrowEarned.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_arrow_up))
-                }
             }
             itemView.setOnClickListener { clickListener(item._id) }
         }

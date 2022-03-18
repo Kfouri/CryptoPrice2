@@ -12,7 +12,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.example.bestsecret"
+        applicationId "com.kfouri.cryptoprice"
         minSdkVersion min_sdk_version
         targetSdkVersion compile_sdk_version
         versionCode 1

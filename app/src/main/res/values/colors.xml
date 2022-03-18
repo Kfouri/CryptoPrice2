@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_list">#1b1b1b</color>
     <color name="dark">#1e2b31</color>
+    <color name="text_white">#AAFFFFFF</color>
+    <color name="dotNormalColor">#666666</color>
+    <color name="dotFilledColor">#FF018786</color>
 </resources>

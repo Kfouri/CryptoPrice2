@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/background_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.333" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.666" />
+
+        <Button
+            android:id="@+id/button_one"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/keyboardItem"
+            android:text="1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/button_two"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/keyboardItem"
+            android:text="2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/button_one"
+            tools:ignore="MissingConstraints"/>
+
+        <Button
+            android:id="@+id/button_three"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/keyboardItem"
+            android:text="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/button_two"
+            tools:ignore="MissingConstraints"/>
+
+        <Button
+            android:id="@+id/button_four"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/keyboardItem"
+            android:text="4"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_one" />
+
+        <Button
+            android:id="@+id/button_five"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/keyboardItem"
+            android:text="5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/button_two" />
+
+        <Button
+            android:id="@+id/button_six"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/keyboardItem"
+            android:text="6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/button_three" />
+
+        <Button
+            android:id="@+id/button_seven"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/keyboardItem"
+            android:text="7"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_four" />
+
+        <Button
+            android:id="@+id/button_eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/keyboardItem"
+            android:text="8"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/button_five" />
+
+        <Button
+            android:id="@+id/button_nine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/keyboardItem"
+            android:text="9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/button_six" />
+
+        <ImageButton
+            android:id="@+id/button_extra"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:src="@drawable/ic_fingerprint"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_seven" />
+
+        <Button
+            android:id="@+id/button_zero"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/keyboardItem"
+            android:text="0"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/button_eight" />
+
+        <ImageButton
+            android:id="@+id/button_remove"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/button_nine" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="EnterPassword">
+        <attr name="dotNormalColor" format="reference" />
+        <attr name="dotFilledColor" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="NumericPad">
+        <attr name="showExtraButton" format="boolean" />
+        <attr name="extraButtonDrawable" format="reference" />
+    </declare-styleable>
+</resources>
