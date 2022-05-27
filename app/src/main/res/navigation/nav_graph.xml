@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/authenticationFragment"
-        android:name="com.kfouri.cryptoprice2.ui.view.AuthenticationFragment"
+        android:name="com.kfouri.cryptoprice.ui.view.authentication.AuthenticationFragment"
         android:label="Authentication"
         tools:layout="@layout/fragment_authentication" >
 
@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/createPasswordFragment"
-        android:name="com.kfouri.cryptoprice2.ui.view.CreatePasswordFragment"
+        android:name="com.kfouri.cryptoprice.ui.view.authentication.CreatePasswordFragment"
         android:label="Create Password"
         tools:layout="@layout/fragment_create_password" >
 
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/confirmPasswordFragment"
-        android:name="com.kfouri.cryptoprice2.ui.view.ConfirmPasswordFragment"
+        android:name="com.kfouri.cryptoprice.ui.view.authentication.ConfirmPasswordFragment"
         android:label="Confirmar Password"
         tools:layout="@layout/fragment_confirm_password" >
 
@@ -71,7 +71,7 @@
 
     <fragment
         android:id="@+id/currenciesListFragment"
-        android:name="com.kfouri.cryptoprice2.ui.view.CurrenciesListFragment"
+        android:name="com.kfouri.cryptoprice.ui.view.CurrenciesListFragment"
         android:label="CurrenciesListFragment"
         tools:layout="@layout/fragment_currencies" >
         <action
@@ -81,23 +81,42 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_editCurrency"
+            app:destination="@id/editCurrencyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/createCurrencyFragment"
-        android:name="com.kfouri.cryptoprice2.ui.view.CreateCurrencyFragment"
+        android:name="com.kfouri.cryptoprice.ui.view.CreateCurrencyFragment"
         android:label="CreateCurrencyFragment"
         tools:layout="@layout/fragment_create_currency" >
         <argument
-            android:name="currencyId"
-            android:defaultValue="-1"
+            android:name="count"
+            android:defaultValue="0"
             app:argType="integer" />
         <action
             android:id="@+id/action_createCurrencyFragment_to_findCurrencyFragment"
             app:destination="@id/findCurrencyFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/editCurrencyFragment"
+        android:name="com.kfouri.cryptoprice.ui.view.ShowCurrencyFragment"
+        android:label="EditCurrencyFragment"
+        tools:layout="@layout/fragment_show_currency" >
+        <argument
+            android:name="currencyId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
+
     <fragment
         android:id="@+id/findCurrencyFragment"
-        android:name="com.kfouri.cryptoprice2.ui.view.FindCurrencyFragment"
+        android:name="com.kfouri.cryptoprice.ui.view.FindCurrencyFragment"
         android:label="FindCurrencyFragment" />
 </navigation>

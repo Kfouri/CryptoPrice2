@@ -10,4 +10,8 @@
         <attr name="showExtraButton" format="boolean" />
         <attr name="extraButtonDrawable" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="ButtonView">
+        <attr name="text" format="string" />
+    </declare-styleable>
 </resources>

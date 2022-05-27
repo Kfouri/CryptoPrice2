@@ -8,7 +8,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.kfouri.cryptoprice2.ui.viewmodel.CreateCurrencyViewModel" />
+            type="com.kfouri.cryptoprice.ui.viewmodel.CreateCurrencyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,7 +63,7 @@
                             android:id="@+id/editText_symbol"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Simbolo Moneda"
+                            android:hint="@string/currency_symbol"
                             android:inputType="textCapWords"
                             android:text="@={viewModel.symbolObservable}">
 
@@ -78,7 +78,7 @@
                         android:layout_height="60dp"
                         android:layout_weight="1"
                         android:drawableLeft="@drawable/ic_search"
-                        android:text="Buscar"
+                        android:text="@string/find"
                         android:backgroundTint="@color/dark"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -104,7 +104,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        android:hint="Current Price"
+                        android:hint="@string/current_price"
                         android:inputType="numberDecimal"
                         android:text="@={viewModel.currentPriceObservable}" />
 
@@ -147,107 +147,11 @@
                         android:id="@+id/editText_amount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Cantidad"
+                        android:hint="@string/amount_hint"
                         android:inputType="numberDecimal"
                         android:text="@={viewModel.amountObservable}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:focusable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editText_purchasePrice"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Precio Compra"
-                        android:inputType="numberDecimal"
-                        android:text="@={viewModel.purchasePriceObservable}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout55"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:focusable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editText_totalCurrent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:hint="Total Actual"
-                        android:inputType="numberDecimal"
-                        android:text="@={viewModel.totalCurrentObservable}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:focusable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout55">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editText_totalInvested"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:hint="Total Invertido"
-                        android:inputType="numberDecimal"
-                        android:text="@={viewModel.totalInvestedObservable}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayoutButtons"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:padding="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
-
-                    <Button
-                        android:id="@+id/buttonCancel"
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/dark"
-                        android:text="Cancelar" />
-
-                    <Button
-                        android:id="@+id/buttonSave"
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/dark"
-                        android:enabled="@{viewModel.buttonSaveObservable}"
-                        android:onClick="@{() -> viewModel.saveCurrencyClick()}"
-                        android:text="Guardar" />
-
-                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

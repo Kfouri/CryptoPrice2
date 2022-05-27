@@ -1,12 +1,19 @@
 <resources>
     <string name="app_name">CryptoPrice</string>
-    <string name="enter_your_password">Ingresá tu clave</string>
-    <string name="create_your_password">Creá tu clave</string>
-    <string name="do_not_remember_password">No recuerdo mi clave</string>
-    <string name="repeat_password">Repetir clave</string>
-    <string name="button_create_password">Crear Clave</string>
-    <string name="button_back">Atrás</string>
-    <string name="button_continue">Continuar</string>
-    <string name="password_not_match_error">Ambas claves no son iguales</string>
-    <string name="create_your_password_subtilte">Esta clave de seis dígitos la vas a usar para ingresar en la app de ahora en más.</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="create_your_password">Create your password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="password_not_match_error">Both password must be equals</string>
+    <string name="price">Price:</string>
+    <string name="amount">Amount:</string>
+    <string name="priceHigh24">Price High 24H</string>
+    <string name="priceLow24">Price Low 24H</string>
+    <string name="currency_symbol">Currency Symbol</string>
+    <string name="find">Find</string>
+    <string name="current_price">Current Price</string>
+    <string name="amount_hint">Amount</string>
+    <string name="create_your_password_subtitle">You will use this six-digit password to enter the app from now on</string>
+    <string name="name_symbol">Currency Name or Symbol</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="edit_amount">Edit your currency amount</string>
 </resources>

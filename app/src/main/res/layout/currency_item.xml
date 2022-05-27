@@ -1,104 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/item_parent"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/background_list"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <ImageView
-        android:id="@+id/imageView_logo"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:id="@+id/textView_currencySymbol"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".20"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        tools:text="OMI" />
-
-    <TextView
-        android:id="@+id/textView_currencyPrice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        tools:text="12345678.90" />
-
+<layout>
     <LinearLayout
-        android:id="@+id/linearLayout_pricePercentage"
-        android:layout_width="0dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/item_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".20"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/percentage_background_green">
+        android:orientation="horizontal"
+        android:background="@color/background_list"
+        xmlns:tools="http://schemas.android.com/tools">
 
         <ImageView
-            android:id="@+id/imageView_arrowPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="4dp"
-            android:src="@drawable/ic_arrow_up" />
+            android:id="@+id/imageView_logo"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
 
         <TextView
-            android:id="@+id/textView_pricePercentage"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView_currencySymbol"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="4dp"
-            android:text="0.00%"
+            android:layout_weight=".20"
             android:textColor="@color/white"
-            android:textSize="10sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical">
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            tools:text="OMI" />
 
         <TextView
-            android:id="@+id/textView_have"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView_currencyPrice"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".25"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             tools:text="12345678.90" />
 
-        <TextView
-            android:id="@+id/textView_currencyAmount"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout_pricePercentage"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="0" />
-    </LinearLayout>
+            android:layout_weight=".20"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/percentage_background_green">
 
-</LinearLayout>
+            <ImageView
+                android:id="@+id/imageView_arrowPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_arrow_up" />
+
+            <TextView
+                android:id="@+id/textView_pricePercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="4dp"
+                android:text="0.00%"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".25"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_have"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="12345678.90" />
+
+            <TextView
+                android:id="@+id/textView_have_hidden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="******" />
+
+            <TextView
+                android:id="@+id/textView_currencyAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white_grey"
+                android:layout_marginTop="8dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="0" />
+
+            <TextView
+                android:id="@+id/textView_currencyAmount_hidden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white_grey"
+                android:layout_marginTop="8dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="******" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/background_list">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView_logo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/star"/>
+
+            <TextView
+                android:id="@+id/textView_currencySymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView_logo"
+                app:layout_constraintStart_toEndOf="@+id/imageView_logo"
+                app:layout_constraintTop_toTopOf="@+id/imageView_logo"
+                tools:text="Bitcoin" />
+
+            <TextView
+                android:id="@+id/textView_title_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/price"
+                android:textColor="@color/white_grey"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_currencyPrice"
+                app:layout_constraintEnd_toStartOf="@+id/textView_currencyPrice" />
+
+            <TextView
+                android:id="@+id/textView_currencyPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textView_currencyAmount"
+                app:layout_constraintTop_toBottomOf="@+id/imageView_logo"
+                tools:text="$ 20,000.00" />
+
+            <TextView
+                android:id="@+id/textView_title_usd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="USD"
+                android:textColor="@color/white_grey"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_currencyPrice"
+                app:layout_constraintStart_toEndOf="@+id/textView_currencyPrice" />
+
+            <TextView
+                android:id="@+id/textView_currencyPrice24h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="20sp"
+                android:textColor="@color/white_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView_logo"
+                tools:text="-2.25%" />
+
+            <TextView
+                android:id="@+id/textView_title_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/amount"
+                android:textColor="@color/white_grey"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_currencyAmount"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_currencyAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textView_title_amount"
+                app:layout_constraintTop_toBottomOf="@+id/textView_currencyPrice"
+                tools:text="123456" />
+
+            <ImageView
+                android:id="@+id/ImageViewEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_currencyAmount"
+                app:layout_constraintStart_toEndOf="@+id/textView_currencyAmount"
+                app:layout_constraintTop_toTopOf="@+id/textView_currencyAmount" />
+
+            <TextView
+                android:id="@+id/textView_title_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Total:"
+                android:textColor="@color/white_grey"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_currency_total"
+                app:layout_constraintEnd_toStartOf="@+id/textView_currency_total" />
+
+            <TextView
+                android:id="@+id/textView_currency_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textView_currencyAmount"
+                app:layout_constraintTop_toBottomOf="@+id/textView_currencyAmount"
+                tools:text="123456" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="USD"
+                android:textColor="@color/white_grey"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_currency_total"
+                app:layout_constraintStart_toEndOf="@+id/textView_currency_total" />
+
+            <TextView
+                android:id="@+id/textView_currencyExchange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/text_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_currencyPrice"
+                tools:text="Binance" />
+
+            <com.kfouri.cryptoprice.customview.ButtonView
+                android:id="@+id/textView_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toStartOf="@id/textView_week"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_currency_total"
+                app:text="1D" />
+
+            <com.kfouri.cryptoprice.customview.ButtonView
+                android:id="@+id/textView_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_white"
+                app:layout_constraintEnd_toStartOf="@id/textView_month"
+                app:layout_constraintStart_toEndOf="@+id/textView_day"
+                app:layout_constraintTop_toTopOf="@+id/textView_day"
+                app:text="1W" />
+
+            <com.kfouri.cryptoprice.customview.ButtonView
+                android:id="@+id/textView_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_white"
+                app:layout_constraintEnd_toStartOf="@id/textView_year"
+                app:layout_constraintStart_toEndOf="@+id/textView_week"
+                app:layout_constraintTop_toTopOf="@+id/textView_week"
+                app:text="1M" />
+
+            <com.kfouri.cryptoprice.customview.ButtonView
+                android:id="@+id/textView_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView_month"
+                app:layout_constraintTop_toTopOf="@+id/textView_month"
+                app:text="1Y" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/teal_700"
+                app:layout_constraintTop_toBottomOf="@+id/textView_day" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="10dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/teal_700"
+                app:layout_constraintTop_toBottomOf="@+id/lineChart" />
+
+            <TextView
+                android:id="@+id/textView_rank_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Market Cap Rank"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white_grey"
+                app:layout_constraintEnd_toStartOf="@id/textView_high_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+            <TextView
+                android:id="@+id/TextView_marketcaprank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_rank_title"
+                app:layout_constraintStart_toStartOf="@+id/textView_rank_title"
+                app:layout_constraintTop_toBottomOf="@+id/textView_rank_title"
+                tools:text="0"/>
+
+            <TextView
+                android:id="@+id/textView_high_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/priceHigh24"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white_grey"
+                app:layout_constraintEnd_toStartOf="@id/textView_low_title"
+                app:layout_constraintStart_toEndOf="@+id/textView_rank_title"
+                app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+            <TextView
+                android:id="@+id/TextView_high24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_high_title"
+                app:layout_constraintStart_toStartOf="@+id/textView_high_title"
+                app:layout_constraintTop_toBottomOf="@+id/textView_high_title"
+                tools:text="$0.00"/>
+
+            <TextView
+                android:id="@+id/textView_low_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/priceLow24"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView_high_title"
+                app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+            <TextView
+                android:id="@+id/TextView_low24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_low_title"
+                app:layout_constraintStart_toStartOf="@+id/textView_low_title"
+                app:layout_constraintTop_toBottomOf="@+id/textView_low_title"
+                tools:text="$0.00"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

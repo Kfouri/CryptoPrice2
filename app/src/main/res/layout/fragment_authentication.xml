@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.kfouri.cryptoprice2.ui.view.AuthenticationFragment">
+    tools:context="com.kfouri.cryptoprice.ui.view.authentication.AuthenticationFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/background_list"
@@ -13,7 +13,7 @@
             android:id="@+id/imageView2"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/coin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -23,40 +23,28 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:text="@string/enter_your_password"
-            android:textSize="18sp"
             android:textColor="@color/text_white"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-        <com.kfouri.cryptoprice2.customview.EnterPassword
+        <com.kfouri.cryptoprice.customview.EnterPassword
             android:id="@+id/enterPasswordView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:dotNormalColor="@color/dotNormalColor"
-            app:dotFilledColor="@color/dotFilledColor"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="30dp"
+            app:dotFilledColor="@color/dotFilledColor"
+            app:dotNormalColor="@color/dotNormalColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/do_not_remember_password"
-            android:textColor="@color/text_white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/enterPasswordView"
-            android:visibility="gone"/>
-
-        <com.kfouri.cryptoprice2.customview.NumericPad
+        <com.kfouri.cryptoprice.customview.NumericPad
             android:id="@+id/numericPad_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
